@@ -1,0 +1,36 @@
+{
+  "name": "todo-app-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo for the Todo Web Application (Phase I CLI + Phase II Web)",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd apps/frontend && npm run dev",
+    "dev:backend": "cd apps/backend && uvicorn main:app --reload --port 8000",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd apps/frontend && npm run build",
+    "build:backend": "echo 'Backend does not require build step'",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd apps/frontend && npm start",
+    "start:backend": "cd apps/backend && uvicorn main:app --host 0.0.0.0 --port 8000",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd apps/frontend && npm test",
+    "test:backend": "cd apps/backend && python -m pytest",
+    "cli": "python main.py cli",
+    "web": "python main.py web"
+  },
+  "keywords": [
+    "todo",
+    "webapp",
+    "nextjs",
+    "fastapi",
+    "monorepo"
+  ],
+  "author": "Agentic AI Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "workspaces": [
+    "apps/*"
+  ]
+}
