@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
  * BEFORE the redirect happens, so middleware won't bounce back to /tasks.
  */
 export async function GET() {
-  const response = NextResponse.redirect(new URL("/login", process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"));
+  const response = NextResponse.redirect(new URL("/login", process.env.NEXT_PUBLIC_APP_URL || "https://todo-app-with-chatbot-js74.vercel.app"));
 
   // Clear all Better Auth cookies
   response.cookies.set("better-auth.session_token", "", {
