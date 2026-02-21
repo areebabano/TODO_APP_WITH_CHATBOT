@@ -45,6 +45,6 @@ if __name__ == "__main__":
     uvicorn.run(
         "apps.backend.main:app",
         host="0.0.0.0",
-        port=int(os.getenv("BACKEND_PORT", "8000")),
+        port=int(os.getenv("PORT", os.getenv("BACKEND_PORT", "7860"))),
         reload=True,
     )
