@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BACKEND_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/v1";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://areebahammad-todo-app-chatbot.hf.space/api/v1";
 
 /**
  * Extract the raw session token from a Better Auth signed cookie value.

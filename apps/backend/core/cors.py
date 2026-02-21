@@ -19,7 +19,7 @@ def configure_cors(app: FastAPI):
     if allowed_origins_env:
         allowed_origins = [origin.strip() for origin in allowed_origins_env.split(",")]
     else:
-        # Default to allowing localhost for development
+        # Default to allowing localhost for development + production URLs
         allowed_origins = [
             "http://localhost:3000",  # Next.js default port
             "http://localhost:3001",  # Alternative Next.js port
@@ -27,6 +27,7 @@ def configure_cors(app: FastAPI):
             "http://127.0.0.1:3001",
             "http://localhost:8000",  # Backend itself
             "http://127.0.0.1:8000",
+            "https://todo-app-with-chatbot-js74.vercel.app",  # Production frontend
         ]
 
     app.add_middleware(
