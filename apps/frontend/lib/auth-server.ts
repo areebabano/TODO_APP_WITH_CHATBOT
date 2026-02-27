@@ -10,7 +10,7 @@ if (!process.env.BETTER_AUTH_SECRET) {
 }
 
 export const auth = betterAuth({
-  baseURL: process.env.NEXT_PUBLIC_APP_URL || "https://todo-app-with-chatbot-js74.vercel.app",
+  // baseURL: process.env.NEXT_PUBLIC_APP_URL || "https://todo-app-with-chatbot-js74.vercel.app",
   secret: process.env.BETTER_AUTH_SECRET,
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
