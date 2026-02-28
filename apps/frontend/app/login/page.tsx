@@ -34,15 +34,31 @@ export default function LoginPage() {
 
     setLoading(true);
     try {
-      const res = await signIn.email({ email, password });
-      if (res.error) {
-        setError("Invalid email or password");
-      } else if (res.data) {
-        router.push("/tasks");
-        router.refresh();
+      const res = await signIn.email(
+        { email, password },
+        {
+          onError: (ctx) => {
+            if (ctx.error.status === 429) {
+              setError("Too many attempts. Please wait a minute and try again.");
+            } else if (ctx.error.status === 401 || ctx.error.status === 403) {
+              setError("Invalid email or password.");
+            } else {
+              setError(ctx.error.message || "Login failed. Please try again.");
+            }
+          },
+          onSuccess: () => {
+            router.push("/tasks");
+            router.refresh();
+          },
+        }
+      );
+      // Fallback check if callbacks didn't fire
+      if (res?.error) {
+        setError("Invalid email or password.");
       }
-    } catch {
-      setError("An error occurred. Please try again.");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "An unexpected error occurred.";
+      setError(message);
     } finally {
       setLoading(false);
     }

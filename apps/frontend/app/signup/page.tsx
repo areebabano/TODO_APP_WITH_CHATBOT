@@ -73,15 +73,31 @@ export default function SignupPage() {
 
     setLoading(true);
     try {
-      const res = await signUp.email({ name, email, password });
-      if (res.error) {
+      const res = await signUp.email(
+        { name, email, password },
+        {
+          onError: (ctx) => {
+            if (ctx.error.status === 422) {
+              setError("This email is already registered. Please sign in instead.");
+            } else if (ctx.error.status === 429) {
+              setError("Too many attempts. Please wait a minute and try again.");
+            } else {
+              setError(ctx.error.message || "Signup failed. Please try again.");
+            }
+          },
+          onSuccess: () => {
+            router.push("/tasks");
+            router.refresh();
+          },
+        }
+      );
+      // Fallback check if callbacks didn't fire
+      if (res?.error) {
         setError(res.error.message || "Signup failed. Please try again.");
-      } else if (res.data) {
-        router.push("/tasks");
-        router.refresh();
       }
-    } catch {
-      setError("An error occurred. Please try again.");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "An unexpected error occurred.";
+      setError(message);
     } finally {
       setLoading(false);
     }

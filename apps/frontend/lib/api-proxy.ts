@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// IMPORTANT: Use server-only env var (NOT NEXT_PUBLIC_*) to avoid exposing backend URL
+// and to prevent the frontend from calling itself in a loop.
 const BACKEND_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://areebahammad-todo-app-chatbot.hf.space/api/v1";
+  process.env.BACKEND_API_URL || "https://areebahammad-todo-app-chatbot.hf.space/api/v1";
 
 /**
  * Extract the raw session token from a Better Auth signed cookie value.

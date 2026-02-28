@@ -27,7 +27,8 @@ def configure_cors(app: FastAPI):
             "http://127.0.0.1:3001",
             "http://localhost:8000",  # Backend itself
             "http://127.0.0.1:8000",
-            "https://todo-app-with-chatbot-js74.vercel.app",  # Production frontend
+            "https://todo-app-with-chatbot-js74.vercel.app",  # Production frontend (old)
+            "https://todo-app-with-chatbot-xfyp.vercel.app",  # Production frontend (new)
         ]
 
     app.add_middleware(
