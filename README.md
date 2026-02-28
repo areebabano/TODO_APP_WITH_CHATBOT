@@ -264,4 +264,4 @@ The project follows PEP 8 guidelines with type hints throughout for Python code 
 
 ## License
 
-MIT License
+MIT License. 
